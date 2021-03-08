@@ -25,19 +25,27 @@ exports.recover = (req, res) => {
             if(!user || err){
                 return res.status(404).json({error:"User with given Email is not found. Please check Your Email."});
             }
+            // to put some changes 
+            
             //2. Token Generation
+            // Firstly put token expiry after 20 minutes only.
+            // Secondly check if user with given Email is having an unexpired Token, so not send To him a Email.
+            if(user.expireToken > Date.now()){
+                return res.status(403).json({message:"You can't make Multiple Request For password Change within 20 minutes."});
+            }
             try{
-                jwt.sign({id:user._id},process.env.JWT_SECRET,{expiresIn:"1h"},(err,token)=>{
+                jwt.sign({id:user._id},process.env.JWT_SECRET,{expiresIn:"1200s"},(err,token)=>{
                     // console.log(err);
                     if(err) throw err;
                     user.resetToken = token;
-                    user.expireToken = Date.now() + 3600000;
+                    user.expireToken = Date.now() + 1200000; //20 minutes
                     user.save().then((result)=>{
                         transport.sendMail({
                             from:process.env.FROM_EMAIL,
                             to:user.email,
                             subject:"Password Reset.",
                             html:`<p>Your Request For Password Reset.</p>
+                                     <p> your Link will be Expired in 20 minutes.</p>
                                     <h5>Click on the <a href="http://${req.headers.host}/api/reset/${token}">Link</a></h5>` 
                         },(err,data)=>{
                             if(err){ 
