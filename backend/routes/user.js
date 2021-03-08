@@ -19,6 +19,10 @@ router.post("/login",user_validator.loginUser,user_controller.login);
 // @desc get user data
 // @access private
 router.get("/user",auth,user_controller.fetchUser);
+// @route GET api/Admin
+// @desc get user data
+// @access private
+router.get("/Admin",auth,user_controller.fetchUser);
 // @route POST api/update_user
 // @access private
 router.put("/update_user",

@@ -18,6 +18,7 @@ const transport = nodemailer.createTransport({
 // @desc Recover Password - Generates token and Sends password reset email same
 // @access Public
 exports.recover = (req, res) => {
+    console.log(req);
     // 1. Find user with email
     User.findOne({email: req.body.email})
         .then((user,err) => {
@@ -30,14 +31,14 @@ exports.recover = (req, res) => {
                     // console.log(err);
                     if(err) throw err;
                     user.resetToken = token;
-                    user.expireToken = Date.now() + 3600;
+                    user.expireToken = Date.now() + 3600000;
                     user.save().then((result)=>{
                         transport.sendMail({
                             from:process.env.FROM_EMAIL,
                             to:user.email,
                             subject:"Password Reset.",
                             html:`<p>Your Request For Password Reset.</p>
-                                    <h5>Click on the <a href="http:/${req.headers.host}/api/reset/${token}">Link</a></h5>` 
+                                    <h5>Click on the <a href="http://${req.headers.host}/api/reset/${token}">Link</a></h5>` 
                         },(err,data)=>{
                             if(err){ 
                                 throw err;
@@ -61,12 +62,13 @@ exports.recover = (req, res) => {
 // @desc Reset Password - Validate password reset token and shows the password reset vie
 // @access Public
 exports.reset = (req, res) => {
-    User.findOne({resetPasswordToken: req.params.token, expireToken: {$gt: Date.now()}})
+    User.findOne({resetToken: req.params.token, expireToken: {$gt: Date.now()}})
         .then((user) => {
+            console.log(user);
             if (!user) return res.status(401).json({message: 'Password reset token is invalid or has expired.'});
 
             //Redirect user to form with the email address
-            res.render('reset', {user});
+            res.status(201).json({message: 'form will appear soon.'})
         })
         .catch(err => res.status(500).json({message: err.message}));
 };
@@ -77,7 +79,7 @@ exports.reset = (req, res) => {
 // @access Public
 exports.resetPassword = (req, res) => {
     User.findOne({resetToken: req.params.token, resetPasswordExpires: {$gt: Date.now()}})
-        .then((user) => {
+        .then((user ,err) => {
             if (!user) return res.status(401).json({message: 'Password reset token is invalid or has expired.'});
 
             //Set the new password

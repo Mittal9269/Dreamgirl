@@ -48,6 +48,7 @@ exports.createNewUser = (req,res)=>{
 //@param {req} request Object
 //@param {res} response Object
 exports.login = (req,res)=>{
+    console.log(req.body);
     if(req.body.password !== req.body.verifyPassword){
         return res.status(400).json({message:"Password Doesn't match"})
     }
@@ -69,6 +70,7 @@ exports.login = (req,res)=>{
                 else{
                     foundUser.password = undefined;
                     res.json({jsonToken,message:"Login SuccesFully Done.",user:foundUser});
+                    // console.log(foundUser);
                     // req.cookie("jwt" , jwt , {
                     //     expires : new Date(Date.now() + 1000),
                     // })
