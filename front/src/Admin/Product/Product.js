@@ -3,13 +3,17 @@
 
 import React, { useEffect, useState } from "react";
 import {Redirect} from "react-router-dom";
+// import product from "../../../backend/models/Product";
+import Navbar from "../../FormType/Navbar";
 // import CategaryCard from "./CategaryCard";
+import ProductC from "./ProductC";
+
 export default function Product(){
     const [redirect , setRedirect] = useState(false);
+    const [products,setProducts] = useState([]);
     let Cate;
     let token
     useEffect(() =>{
-        console.log("Hello from useEffect of Categary")
         token = sessionStorage.getItem('Token');
         let data = JSON.parse(sessionStorage.getItem('userInfo'))
         if(data.isAdmin){
@@ -24,10 +28,7 @@ export default function Product(){
             })
             .then(res=>res.json())
             .then(data =>{
-                sessionStorage.setItem("Cat", JSON.stringify(data));
-                // console.log(data);
-                window.location = "/product/pro";
-                
+                setProducts(data); 
             })
             .catch(err=>console.log(err));
         }
@@ -38,11 +39,30 @@ export default function Product(){
     },[])
 
 
+    const AddProduct = (e) =>{
+        e.preventDefault();
+        window.location  = "/product/update";
+    }
+
     return(
         
         <>
+            <Navbar />
             {redirect &&  <Redirect to="/api/login" />}
-            Hello Everyone
+            {products.length !== 0 && (
+                products.map((value) =>{
+                    return(
+                        <ProductC 
+                        everything = {value}
+                        />
+                    )
+                })
+            )}
+            <form onSubmit={AddProduct}>
+                <button>
+                    Add product
+                </button>
+            </form>
         </>
     )
 }

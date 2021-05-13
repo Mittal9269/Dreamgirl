@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import  { Redirect } from 'react-router-dom';
 import Navbar from "../FormType/Navbar";
 
-
-export default function User(){
+export default function Cart(){
     const [redirect,setRedirect] = useState(false);
     const [data ,Setdata] = useState({
         
@@ -26,17 +25,11 @@ export default function User(){
     return(
         <>
             <Navbar />
-            Hello User data
+            <h1 className = "text-center">Hello here are your Cart</h1>
             {redirect && <Redirect to="/api/login" />}
             <ul>
-                <li>{data.username}</li>
-                <li>{data.firstName}</li>
-                <li>{data.lastName}</li>
                 <li>{data.history}</li>
             </ul>
-            <form onSubmit={onSub}>
-                <button>Update</button>
-            </form>
         </>
     )
 }

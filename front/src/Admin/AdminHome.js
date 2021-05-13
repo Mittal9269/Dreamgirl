@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {Redirect} from "react-router-dom";
+import Navbar from "../FormType/Navbar";
 
 export default function AdminHome(){
     const [redirect , setRedirect] = useState(false);
@@ -22,14 +23,15 @@ export default function AdminHome(){
         window.location.replace("http://localhost:3000/product/product");
     }
     return(
-        <>
+        <>  
+            <Navbar />
             {redirect &&  <Redirect to="/api/login" />}
             Hello Admin
             <form onSubmit={onSub}> 
-                <button>Product</button>
+                <button>Categary</button>
             </form>
             <form onSubmit={onS}>
-                <button>ProductReal</button>
+                <button>Product</button>
             </form>
         </>
     )

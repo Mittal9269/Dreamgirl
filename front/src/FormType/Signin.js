@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from "react-router-dom";
-import "./Form.css"
+import "../User/Form.css"
+import {Switch , Route} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import Logo from "../Images/logo.png";
 // import axios from 'axios';
+import Navbar from "./Navbar";
 
 export default function Signin() {
     const [redirect, setRedirect] = useState(false);
@@ -49,7 +52,15 @@ export default function Signin() {
             body: JSON.stringify(registerd),
             credentials: "same-origin"
         })
-            .then(res => console.log(res))
+            .then(res => {
+                if(res.status !== 201){
+                    alert("bad request");
+                }
+                else{
+                    alert("successfully done")
+                }
+            }
+            )
             .catch(err => console.log(err));
         // axios.post('http://localhost:8000/api/signup',registerd)
         // .then(Response => console.log(Response))
@@ -60,6 +71,7 @@ export default function Signin() {
     }
     return (
         <>
+        <Navbar />
             {redirect && <Redirect to="/" />}
             <div class="container px-4 py-5 mx-auto">
                 <div class="card card0">
@@ -123,7 +135,7 @@ export default function Signin() {
                                 </div>
                             </div>
                             <div class="bottom text-center mb-5">
-                                <p href="#" class="sm-text mx-auto mb-3">Already have an account?<button class="btn btn-white ml-2">Login </button></p>
+                                <p href="#" class="sm-text mx-auto mb-3">Already have an account?<NavLink to="/api/login" class="btn btn-white ml-2">Login </NavLink></p>
                             </div>
                         </div>
                         <div class="card card2">

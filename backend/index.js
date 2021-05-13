@@ -9,7 +9,7 @@ const app = express();
 //import Routes 
 const userAuth = require("./routes/user.js");
 const ProductRouter = require("./routes/product");
-// const CategaryRouter = require("./routes/categery");
+const CategaryRouter = require("./routes/categery");
 
 //DataBase Connections
 mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true , useUnifiedTopology: true,useCreateIndex: true});
@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: false }));
 // ENDPOINTS
 app.use("/api",userAuth);
 app.use("/product" ,ProductRouter);
-// app.use("/categery" ,CategaryRouter);
+app.use("/categery" ,CategaryRouter);
 // app.get('/api/')
 
 app.listen(process.env.PORT || 8000, ()=>{

@@ -1,26 +1,31 @@
 import React from "react";
 import {Switch , Route} from "react-router-dom";
-import Navbar from "./Navbar";
-import Signin from "./User/Signin"; 
-import Login from "./User/Login"; 
+import Navbar from "./FormType/Navbar";
+import Signin from "./FormType/Signin"; 
+import Login from "./FormType/Login"; 
 import Home from "./User/Home";
 import Recover from "./User/Recover";
 import User from "./User/User";
 import Update from "./User/Update";
 import AdminHome from "./Admin/AdminHome";
-import Logout from "./Logout";
-import Categary from "./Admin/Categary";
-import Cate from "./Admin/CategaryCard";
-import Add from "./Admin/Add";
-import Product from "./Admin/Product";
+import Logout from "./FormType/Logout";
+import Categary from "./Admin/Categary/Categary";
+import Add from "./Admin/Categary/Add";
+import Product from "./Admin/Product/Product";
+import "../node_modules/jquery/dist/jquery.min.js";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import Footer from "./User/Footer";
+import Footer from "./FormType/Footer";
 import Shop from "./User/Shop";
+import ProductCard from "./Admin/Product/ProductCard";
+import UpdateProduct from "./Admin/Product/UpdateProduct";
+import Cart from "./User/Cart";
+import ShopInfo from "./User/CardInfo/CardInfo";
 
 function App() {
+  console.log("conform everyone");
   return (
     <>
-    <Navbar />
+    {/* <Navbar /> */}
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/api/signup" component={Signin} />
@@ -32,9 +37,12 @@ function App() {
         <Route exact path="/api/update_user" component={Update} />
         <Route exact path="/categery/categery" component={Categary} />
         <Route exact path="/product/Product" component={Product} />
-        <Route exact path="/categery/cate" component={Cate} />
+        <Route exact path="/product/update" component={ProductCard} />
+        <Route exact path="/product/updateProduct/:id" component={UpdateProduct} />
         <Route exact path="/categery/update" component={Add} />
         <Route exact path="/categery/shop" component={Shop} />
+        <Route exact path="/shopInfo/:id" component={ShopInfo} />
+        <Route exact path="/api/cart" component={Cart} />
         {/* <Route exact path="/product/product" component={Product} /> */}
       </Switch>
     <Footer />

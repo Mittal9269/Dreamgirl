@@ -161,13 +161,13 @@ code {
 
 
 .itemAccro{
-  background: #918c75b3;
+  background: #e7e3d2b3;
   margin-bottom: 5px;
   padding: 10px 20px;
 }
 
 .title{
-  color: #85662b;
+  color: #df9815;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -176,15 +176,19 @@ code {
 .content{
   margin-top: 5px;
   text-align: start;
-  color: #8b7f75;
+  color: rgb(7, 7, 7);
   max-height: 0;
   overflow: hidden;
   transition: all 0.5s cubic-bezier(0,1,0,1);
 }
 .content.show{
-  color: #8b7f75;
+  color: rgb(8, 8, 8);
   height: auto;
   max-height: 9999px;
   transition: all 0.5s cubic-bezier(1,0,1,0);
+}
+
+.inputSize{
+  width: 250px;
 }
 

@@ -11,12 +11,13 @@ import "jquery";
 import Carousel from 'react-bootstrap/Carousel'
 import Section from "./Section";
 import Card from "./Card";
-
+import Navbar from "../FormType/Navbar";
 
 
 export default function Home() {
     return (
         <>
+            <Navbar />
             <div style={{ width: "200px" }}>
 
             </div>
@@ -96,9 +97,9 @@ export default function Home() {
                         <div className="row">
                             <div className="col-10 mx-auto">
                                 <div className="row gy-4">
-                                    <Card img={Blank} />
-                                    <Card img={Blank} />
-                                    <Card img={Blank} />
+                                    <Card img={Img1} />
+                                    <Card img={Img1} />
+                                    <Card img={Img1} />
                                 </div>
                             </div>
                         </div>

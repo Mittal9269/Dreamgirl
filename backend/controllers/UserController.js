@@ -15,7 +15,7 @@ exports.createNewUser = (req,res)=>{
     }
     //encrypting Password and save the user
     const User = new user({
-        username:req.body.username,
+        username:req.body.username, 
         password:req.body.password,
         firstName:req.body.firstName,
         lastName:req.body.lastName,
@@ -36,11 +36,11 @@ exports.createNewUser = (req,res)=>{
                 if(err){
                    return res.status(500).json({error:"Server Error"})
                 }
-                res.status(200).json({message:"SuccesFully Registered"})
+                res.status(200).json({message:"SuccesFully Updated"})
             })
             .catch(err=>{
                 console.log(err);
-                res.status(400).json({message:"Registeration Error, Please Try Again",err})
+                res.status(400).json({message:"Updatetion Error, Please Try Again",err})
             })
         })
     })
@@ -50,7 +50,7 @@ exports.createNewUser = (req,res)=>{
 //@param {req} request Object
 //@param {res} response Object
 exports.login = (req,res)=>{
-    console.log(req.body);
+    // console.log(req.body);
     if(req.body.password !== req.body.verifyPassword){
         return res.status(400).json({message:"Password Doesn't match"})
     }
@@ -90,6 +90,7 @@ exports.fetchUser = (req,res)=>{
 }
 //@function For Updating User Details
 exports.userUpdate = (req,res)=>{
+    const token = req.header("x-auth-token");
     //Find user in database
     user.findById(req.user.id,(err,foundUser)=>{
         if(err)
@@ -107,6 +108,10 @@ exports.userUpdate = (req,res)=>{
             isCustomer:true,
             isRestricted:false
         }
+        if(req.body.password !== req.body.verifyPassword){
+            console.log("error in password");
+            return res.status(400).json({message:"Password Doesn't match"})
+        }
         // const updateUser = user.findByIdAndDelete(req.body.id , req.body);
         bcrypt.genSalt(12,(err,salt)=>{
             if(err) throw err;
@@ -122,8 +127,9 @@ exports.userUpdate = (req,res)=>{
                     if(err){
                        return res.status(500).json({error:"Server Error"})
                     }
-                    
-                    res.status(200).json({message:"SuccesFully Updated"})
+                    // console.log(new_user)
+                    new_user.password = undefined
+                    res.json({jsonToken:token,message:"SuccesFully Updated",user:new_user});
                 })
                 .catch(err=>{
                     res.status(400).json({message:"Updation Error, Please Try Again",err})

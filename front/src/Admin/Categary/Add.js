@@ -33,14 +33,8 @@ export default function Update(){
               body: JSON.stringify(val),
               credentials: "same-origin"
             })
-            .then(res=>console.log(res))
+            .then(res=>window.location = '/categery/categery')
             .catch(err=>console.log(err));
-        // axios.post('http://localhost:8000/api/signup',registerd)
-        // .then(Response => console.log(Response))
-        // .catch(err => console.log(err));
-
-        window.location = '/catege ry/cate';
-       
         }
 
     

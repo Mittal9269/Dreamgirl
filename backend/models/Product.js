@@ -16,7 +16,7 @@ const ProductSchema = new mongoose.Schema({
         required : true, 
     },
     Available : {
-        type : Boolean, 
+        type : String, 
         required : true,
     },
     Color : {
@@ -47,7 +47,7 @@ const ProductSchema = new mongoose.Schema({
     },
     DisCount :  {
         type : Number, 
-        default: '',
+        default: 0,
     }
 
 });

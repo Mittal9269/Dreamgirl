@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {Redirect} from "react-router-dom";
+import Navbar from "../FormType/Navbar";
 
 export default function Update(){
     const [redirect , setRedirect] = useState(false);
@@ -60,11 +61,16 @@ export default function Update(){
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(update)
-        }).then(res =>console.log(res))
+        }).then(res=>res.json())
+        .then(res=>{
+            sessionStorage.setItem("userInfo" , JSON.stringify(res.user))
+            window.location = "/api/user"
+        })
         .catch(err=>console.log(err));
     }
     return (
         <>
+            <Navbar />
             {redirect && <Redirect to="/api/login" />}
             <form onSubmit={onSub}>
                 <input 

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Navbar from "../FormType/Navbar";
 
 export default function Recover(){
     let [data,setEmail] = useState("")
@@ -21,6 +22,7 @@ export default function Recover(){
             })
             .then(res=>{
                 console.log(res);
+                // console.log(res.massage)
             })
             .catch(err=>console.log(err));   
 
@@ -29,6 +31,7 @@ export default function Recover(){
 
     return(
         <>
+        <Navbar />
         <form onSubmit={onSub}>
             <input type="email" 
             placeholder="type Email" 

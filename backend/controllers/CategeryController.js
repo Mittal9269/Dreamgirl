@@ -16,14 +16,15 @@ exports.newCategary = (req , res) =>{
     })
 }
 
-exports.fetchproduct = (req, res) => {
+exports.fetchcategary = (req, res) => {
     categary.find()
     .then(fetchedCategary=>res.json(fetchedCategary))
     .catch(err => console.log(err))
 }
 
 exports.updateCategary = (req, res)=>{
-    categary.findById(req.categary.id,(err,foundUser)=>{
+    categary.findById(req.params.id,(err,foundUser)=>{
+        // console.log(req.categary.id)
         if(err)
             return res.json({message:"Error in Fecching Categary, please try again."});
         if(!foundUser)
@@ -31,10 +32,12 @@ exports.updateCategary = (req, res)=>{
             updatedUser = {
                 Categary : req.body.Categary
             }
-            categary.findByIdAndUpdate(req.categary.id , updatedUser , {
+            // console.log(req.body)
+            categary.findByIdAndUpdate(req.params.id , updatedUser , {
                 new : true, 
                 useFindAndModify : false 
             }).then((new_user,err)=>{
+                // console.log(new_user)
                 if(err){
                    return res.status(500).json({error:"Server Error"})
                 }
@@ -48,7 +51,7 @@ exports.updateCategary = (req, res)=>{
 }
 
 exports.deleteCategary = (req ,res) =>{
-    console.log(req.params.id);
+    // console.log(req.params.id);
     categary.findById(req.params.id,(err,foundCategary)=>{
         if(err)
             return res.json({message:"Error in Fecching Categary, please try again."});

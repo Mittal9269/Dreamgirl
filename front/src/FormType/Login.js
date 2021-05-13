@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
-import "./Form.css"
+import "../User/Form.css"
+import {Switch , Route} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import Logo from "../Images/logo.png";
+import Navbar from "./Navbar";
 
 export default function Login() {
     let token;
@@ -43,38 +46,25 @@ export default function Login() {
         })
             .then(res => res.json())
             .then(data => {
+
                 token = data.jsonToken;
-                sessionStorage.setItem("Token", token);
-                if (token) {
-                    fetch('http://localhost:8000/api/user', {
-                        method: 'GET',
-                        headers: {
-                            'x-auth-token': token,
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json',
-                        }
-                    })
-                        .then(res => res.json())
-                        .then(data => {
-                            sessionStorage.setItem("userInfo", JSON.stringify(data));
-                            // console.log(data);
-                            if (data.isAdmin) {
-                                window.location = "/api/Admin";
-                            }
-                            else {
-                                window.location = "/api/user";
-                            }
-                        })
-                        .catch(err => console.log(err));
+                // console.log(data)
+                if(token !== undefined && token !== null){
+                    // console.log(token);
+                    sessionStorage.setItem("Token", token);
+                    sessionStorage.setItem("userInfo", JSON.stringify(data.user));
+                    if (data.user.isAdmin) {
+                            window.location = "/api/Admin";
+                    }
+                    else {
+                        window.location = "/api/user";
+                    }
                 }
-                else {
-                    console.log("no one");
+                else{
+                    alert(data.message)
                 }
             })
             .catch(err => console.log(err));
-        // axios.post('http://localhost:8000/api/signup',registerd)
-        // .then(Response => console.log(Response))
-        // .catch(err => console.log(err));
 
     }
     const ForgetSubmit = (e) => {
@@ -83,37 +73,8 @@ export default function Login() {
     }
     return (
         <>
+            <Navbar />
             {redirect && <Redirect to="/" />}
-            {/* <form onSubmit={LoginSubmit}>
-                <input
-                    type="text"
-                    placeholder="Username"
-                    name="username"
-                    value={setData.username}
-                    onChange={InputData}
-                />
-                <input
-                    type="password"
-                    placeholder="password"
-                    name="password"
-                    value={setData.password}
-                    onChange={InputData}
-                />
-                <input
-                    type="password"
-                    placeholder="conform pasword"
-                    name="verifyPassword"
-                    value={setData.verifyPassword}
-                    onChange={InputData}
-                />
-
-                <button type="submit">Submit</button>
-            </form>
-            <form onSubmit={ForgetSubmit}>
-                <button type="submit">Forget password</button>
-            </form> */}
-
-
             <div class="container px-4 py-5 mx-auto">
                 <div class="card card0">
                     <div class="d-flex flex-lg-row flex-column-reverse">
@@ -154,13 +115,13 @@ export default function Login() {
                                     </form>
                                     <form onSubmit={ForgetSubmit}>
                                         <div class="row justify-content-center my-2">
-                                            <a type="submit"><small class="text-muted">Forget password</small></a>
+                                            <NavLink to='/api/recover' type="submit"><small class="text-muted">Forget password</small></NavLink>
                                         </div>
                                     </form>
                                 </div>
                             </div>
                             <div class="bottom text-center mb-5">
-                                <p href="#" class="sm-text mx-auto mb-3">Don't have an account?<button class="btn btn-white ml-2">Create new</button></p>
+                                <p href="#" class="sm-text mx-auto mb-3">Don't have an account?<NavLink to="/api/signup" class="btn btn-white ml-2">Create new</NavLink></p>
                             </div>
                         </div>
                         <div class="card card2">
