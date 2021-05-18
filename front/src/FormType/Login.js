@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import "../User/Form.css"
-import {Switch , Route} from "react-router-dom";
-import {NavLink} from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Logo from "../Images/logo.png";
 import Navbar from "./Navbar";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 export default function Login() {
     let token;
@@ -28,6 +31,7 @@ export default function Login() {
             };
         })
     }
+
     const LoginSubmit = (e) => {
         e.preventDefault();
         const login = {
@@ -35,6 +39,7 @@ export default function Login() {
             password: data.password,
             verifyPassword: data.verifyPassword,
         }
+
 
         fetch('http://localhost:8000/api/login', {
             method: 'POST',
@@ -49,19 +54,51 @@ export default function Login() {
 
                 token = data.jsonToken;
                 // console.log(data)
-                if(token !== undefined && token !== null){
+                if (token !== undefined && token !== null) {
                     // console.log(token);
                     sessionStorage.setItem("Token", token);
                     sessionStorage.setItem("userInfo", JSON.stringify(data.user));
                     if (data.user.isAdmin) {
+
+                        toast.success('🦄 Successful login !', {
+                            position: "top-center",
+                            autoClose: 2000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            });
+                        setTimeout(() => {
                             window.location = "/api/Admin";
+                        }, 2000);
                     }
                     else {
-                        window.location = "/api/user";
+                        toast.success('🦄 Successful login !', {
+                            position: "top-center",
+                            autoClose: 2000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            });
+                        setTimeout(() => {
+                            window.location = "/api/user";
+                        }, 2000);
                     }
                 }
-                else{
-                    alert(data.message)
+                else {
+                    toast.info(data.message, {
+                        position: "top-center",
+                        autoClose: 2000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
+                    // alert(data.message)
                 }
             })
             .catch(err => console.log(err));
@@ -69,7 +106,18 @@ export default function Login() {
     }
     const ForgetSubmit = (e) => {
         e.preventDefault();
-        window.location = "/api/recover";
+        toast.info('You are redirect to Reset password', {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            });
+            setTimeout(() => {
+                window.location = "/api/recover";
+            }, 2000);
     }
     return (
         <>
@@ -85,33 +133,33 @@ export default function Login() {
                                     <h3 class="mb-5 text-center heading">We are DreamGirl</h3>
                                     <h6 class="msg-info">Please login to your account</h6>
                                     <form onSubmit={LoginSubmit}>
-                                    <div class="form-group">
-                                        <label class="form-control-label text-muted">Username</label>
-                                        <input type="text"
-                                            placeholder="Username"
-                                            name="username"
-                                            value={setData.username}
-                                            onChange={InputData} />
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-control-label text-muted">Password</label>
-                                        <input type="password"
-                                            placeholder="password"
-                                            name="password"
-                                            value={setData.password}
-                                            onChange={InputData} />
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-control-label text-muted">Conform Password</label>
-                                        <input type="password"
-                                            placeholder="conform pasword"
-                                            name="verifyPassword"
-                                            value={setData.verifyPassword}
-                                            onChange={InputData} />
-                                    </div>
-                                    <div class="row justify-content-center my-3 px-3">
-                                        <button class="btn-block btn-color">Login to DreamGirl</button>
-                                    </div>
+                                        <div class="form-group">
+                                            <label class="form-control-label text-muted">Username</label>
+                                            <input type="text"
+                                                placeholder="Username"
+                                                name="username"
+                                                value={setData.username}
+                                                onChange={InputData} />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-control-label text-muted">Password</label>
+                                            <input type="password"
+                                                placeholder="password"
+                                                name="password"
+                                                value={setData.password}
+                                                onChange={InputData} />
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="form-control-label text-muted">Conform Password</label>
+                                            <input type="password"
+                                                placeholder="conform pasword"
+                                                name="verifyPassword"
+                                                value={setData.verifyPassword}
+                                                onChange={InputData} />
+                                        </div>
+                                        <div class="row justify-content-center my-3 px-3">
+                                            <button class="btn-block btn-color">Login to DreamGirl</button>
+                                        </div>
                                     </form>
                                     <form onSubmit={ForgetSubmit}>
                                         <div class="row justify-content-center my-2">
@@ -132,6 +180,17 @@ export default function Login() {
                     </div>
                 </div>
             </div>
+            <ToastContainer
+                position="top-center"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </>
     )
 }

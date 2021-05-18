@@ -9,7 +9,7 @@ export default function CategaryC(props){
                method: 'DELETE',
            })
            .then(res =>res.text()) // or res.json()
-           .then(text => console.log(text))
+           .then(text => window.location("/product/product"))
            .catch(err => console.log(err))
     }
     const GotoUpdate =(e) =>{
@@ -22,12 +22,8 @@ export default function CategaryC(props){
             
             <button>{props.everything.ProductName}</button>
             <p>{props.everything.Prize}</p>
-            <p>{props.everything.Size}</p>
-            <p>{props.everything.Available}</p>
-            <p>{props.everything.Color}</p>
+            <p>{props.everything.Quantity}</p>
             <p>{props.everything.ImgFront}</p>
-            <p>{props.everything.ImgLeft}</p>
-            <p>{props.everything.ImgRight}</p>
             <form onSubmit={GotoUpdate}>
                 <button>Update</button>
             </form>

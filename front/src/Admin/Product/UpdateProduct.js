@@ -5,18 +5,17 @@ import { useParams } from "react-router-dom";
 export default function UpdateProduct(props){
     const {id} = useParams();
     const [data,setData] = useState({
-        ProductName: "",
-        Prize: "",
-        Size: "",
-        Available: "",
-        Color: "",
-        ImgFront: "",
-        ImgLeft: "",
-        ImgRight: "",
-        categary:""
+        ProductName : "",
+        Prize : "",
+        Quantity :"",
+        Available : "",
+        ImgFront : "",
+        categary : "",
+        Discription : "",
+        Section  : ""
     });
 
-    const {ProductName,Prize,Size,Available,Color,ImgFront,ImgLeft,ImgRight,categary} = data;
+    const {ProductName,Prize,Quantity,Available,ImgFront,categary,Discription,Section} = data;
 
     const fetchData = ()=>{
         fetch('http://localhost:8000/product/product/' + id , {
@@ -28,17 +27,17 @@ export default function UpdateProduct(props){
             })
             .then(res=>res.json())
             .then(fetchedata =>{
+                console.log(fetchedata)
                 setData({
                     ...data,
                     ProductName:fetchedata.ProductName,
                     Prize: fetchedata.Prize,
-                    Size: fetchedata.Size,
+                    Quantity: fetchedata.Quantity,
                     Available: fetchedata.Available,
-                    Color:fetchedata.Color,
                     ImgFront: fetchedata.ImgFront,
-                    ImgLeft:fetchedata.ImgLeft,
-                    ImgRight:fetchedata.ImgRight,
-                    categary:fetchedata.categary
+                    categary:fetchedata.categary,
+                    Discription:fetchedata.Discription,
+                    Section:fetchedata.Section
                 })
             })
             .catch(err=>console.log(err));
@@ -60,13 +59,12 @@ export default function UpdateProduct(props){
         const val = {
            ProductName: data.ProductName,
             Prize: parseInt(data.Prize),
-            Size: parseInt(data.Size),
+            Quantity: parseInt(data.Quantity),
             Available: data.Available,
-            Color: data.Color,
             ImgFront: data.ImgFront,
-            ImgLeft: data.ImgLeft,
-            ImgRight: data.ImgRight,
-            categary: data.categary
+            categary: data.categary,
+            Discription: data.Discription,
+            Section: data.Section
        }
         fetch('http://localhost:8000/product/product/' + id, {
             headers: {
@@ -96,75 +94,75 @@ export default function UpdateProduct(props){
         <>
             <Navbar />
             <form onSubmit={onUpdate}>
-                <div class="form-group">
+            <div class="form-group">
                     <label class="form-control-label text-muted">ProductName</label>
                     <input type="text"
                         placeholder="Product Name"
-                        value={ProductName}
-                        onChange={InputData("ProductName")} />
+                        name="ProductName"
+                        value={setData.ProductName}
+                        onChange={InputData} />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label text-muted">Prize</label>
                     <input type="number"
                         placeholder="Prize"
-                        value={Prize}
+                        name="Prize"
                         className="noscroll"
                         onSelect={Noscroll}
-                        onChange={InputData("Prize")} />
+                        value={setData.Prize}
+                        onChange={InputData} />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label text-muted">Size</label>
+                    <label class="form-control-label text-muted">Quantity</label>
                     <input type="number"
+                        placeholder="Quantity"
                         className="noscroll"
-                        placeholder="Size"
-                        value={Size}
                         onSelect={Noscroll}
-                        onChange={InputData("Size")} />
+                        name="Quantity"
+                        value={setData.Quantity}
+                        onChange={InputData} />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label text-muted">Available</label>
                     <input type="text"
                         placeholder="Available"
-                        value={Available}
-                        onChange={InputData("Available")} />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label text-muted">Color</label>
-                    <input type="number"
-                        placeholder="Color"
-                        value={Color}
-                        className="noscroll"
-                        onSelect={Noscroll}
-                        onChange={InputData("Color")} />
+                        name="Available"
+                        value={setData.Available}
+                        onChange={InputData} />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label text-muted">ImgFront</label>
                     <input type="text"
                         placeholder="ImgFront"
-                        value={ImgFront}
-                        onChange={InputData("ImgFront")} />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label text-muted">ImgLeft</label>
-                    <input type="text"
-                        placeholder="ImgLeft"
-                        value={ImgLeft}
-                        onChange={InputData("ImgLeft")} />
-                </div>
-                <div class="form-group">
-                    <label class="form-control-label text-muted">ImgRight</label>
-                    <input type="text"
-                        placeholder="ImgRight"
-                        value={ImgRight}
-                        onChange={InputData("ImgRight")} />
+                        name="ImgFront"
+                        value={setData.ImgFront}
+                        onChange={InputData} />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label text-muted">categary</label>
                     <input type="text"
                         placeholder="categary"
-                        value={categary}
-                        onChange={InputData("categary")} />
+                        name="categary"
+                        value={setData.categary}
+                        onChange={InputData} />
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label text-muted">Discription</label>
+                    <input type="text"
+                        placeholder="Discription"
+                        name="Discription"
+                        value={setData.Discription}
+                        onChange={InputData} />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label text-muted">Section</label>
+                    <input type="text"
+                        placeholder="Section"
+                        name="Section"
+                        value={setData.Section}
+                        onChange={InputData} />
+                </div>
+                
                 <div class="row justify-content-center my-3 px-3">
                     <button class="btn-block btn-color">Send request</button>
                 </div>

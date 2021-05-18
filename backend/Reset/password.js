@@ -45,7 +45,7 @@ exports.recover = (req, res) => {
                             subject:"Password Reset.",
                             html:`<p>Your Request For Password Reset.</p>
                                      <p> your Link will be Expired in 20 minutes.</p>
-                                    <h5>Click on the <a href="http://${req.headers.host}/api/reset/${token}">Link</a></h5>` 
+                                    <h5>Click on the <a href="${process.env.DOMAIN}/api/reset/${token}">Link</a></h5>` 
                         },(err,data)=>{
                             if(err){ 
                                 throw err;
@@ -68,24 +68,15 @@ exports.recover = (req, res) => {
 // @route POST api/auth/reset
 // @desc Reset Password - Validate password reset token and shows the password reset vie
 // @access Public
-exports.reset = (req, res) => {
-    User.findOne({resetToken: req.params.token, expireToken: {$gt: Date.now()}})
-        .then((user) => {
-            if (!user) return res.status(401).json({message: 'Password reset token is invalid or has expired.'});
-
-            //Redirect user to form with the email address
-            res.status(201).json({message: 'form will appear soon.'})
-        })
-        .catch(err => res.status(500).json({message: err.message}));
-};
 
 
 // @route POST api/auth/reset
 // @desc Reset Password
 // @access Public
 exports.resetPassword = (req, res) => {
-    User.findOne({resetToken: req.params.token, resetPasswordExpires: {$gt: Date.now()}})
+    User.findOne({resetToken: req.params.token, expireToken: {$gt: Date.now()}})
         .then((user ,err) => {
+            // console.log(user, err)
             if (!user) return res.status(401).json({message: 'Password reset token is invalid or has expired.'});
 
             //Set the new password
@@ -100,21 +91,22 @@ exports.resetPassword = (req, res) => {
                 }
 
                 // send email
-                const mailOptions = {
-                    to: user.email,
-                    from: process.env.FROM_EMAIL,
-                    subject: "Your password has been changed",
-                    text: `Hi ${user.username} \n 
-                    This is a confirmation that the password for your account ${user.email} has just been changed.\n`
-                };
+                // const mailOptions = {
+                //     to: user.email,
+                //     from: process.env.FROM_EMAIL,
+                //     subject: "Your password has been changed",
+                //     text: `Hi ${user.username} \n 
+                //     This is a confirmation that the password for your account ${user.email} has just been changed.\n`
+                // };
 
-                sgMail.send(mailOptions, (error, result) => {
-                    if (error){
-                        return res.status(500).json({message: error.message});
-                    } 
+                // sgMail.send(mailOptions, (error, result) => {
+                //     if (error){
+                //         return res.status(500).json({message: error.message});
+                //     } 
 
-                    res.status(200).json({message: 'Your password has been updated.'});
-                });
+                    // res.status(200).json({message: 'Your password has been updated.'});
+                // });
+                res.status(200).json({message: 'Your password has been updated.'});
             });
         });
 };

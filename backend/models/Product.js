@@ -11,7 +11,7 @@ const ProductSchema = new mongoose.Schema({
         type: Number,
         required : true,
     },
-    Size : {
+    Quantity : {
         type : Number,
         required : true, 
     },
@@ -19,29 +19,21 @@ const ProductSchema = new mongoose.Schema({
         type : String, 
         required : true,
     },
-    Color : {
-        type : Number,
-        required : true, 
-    },
     ImgFront: { 
         // data: Buffer, 
         // contentType: String ,
         type : String,
         required : true, 
     },
-    ImgLeft: {
-        // data: Buffer, 
-        // contentType: String ,
-        type : String,
-        required : true, 
-    },
-    ImgRight: {
-        // data: Buffer, 
-        // contentType: String ,
-        type : String , 
-        required : true, 
-    },
     categary : {
+        type : String,
+        required : true
+    },
+    Discription :{
+        type : String,
+        required : true
+    },
+    Section : {
         type : String,
         required : true
     },

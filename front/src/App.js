@@ -20,6 +20,7 @@ import ProductCard from "./Admin/Product/ProductCard";
 import UpdateProduct from "./Admin/Product/UpdateProduct";
 import Cart from "./User/Cart";
 import ShopInfo from "./User/CardInfo/CardInfo";
+import Reset from "./User/Reset";
 
 function App() {
   console.log("conform everyone");
@@ -42,6 +43,7 @@ function App() {
         <Route exact path="/categery/update" component={Add} />
         <Route exact path="/categery/shop" component={Shop} />
         <Route exact path="/shopInfo/:id" component={ShopInfo} />
+        <Route exact path="/api/reset/:id" component={Reset} />
         <Route exact path="/api/cart" component={Cart} />
         {/* <Route exact path="/product/product" component={Product} /> */}
       </Switch>

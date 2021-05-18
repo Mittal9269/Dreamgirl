@@ -106,11 +106,8 @@ exports.userUpdate = (req,res)=>{
             email:req.body.email,
             isAdmin:false,
             isCustomer:true,
-            isRestricted:false
-        }
-        if(req.body.password !== req.body.verifyPassword){
-            console.log("error in password");
-            return res.status(400).json({message:"Password Doesn't match"})
+            isRestricted:false,
+            history:req.body.history
         }
         // const updateUser = user.findByIdAndDelete(req.body.id , req.body);
         bcrypt.genSalt(12,(err,salt)=>{

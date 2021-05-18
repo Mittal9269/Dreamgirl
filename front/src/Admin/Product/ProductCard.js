@@ -1,18 +1,19 @@
 import { useState } from "react";
 import Navbar from "../../FormType/Navbar";
+import "./product.css";
+
 
 export default function CategaryCard() {
     //get the categary from the storage
     const [data, setData] = useState({
-        ProductName: "",
-        Prize: 0,
-        Size: 0,
-        Available: true,
-        Color: 0,
-        ImgFront: "",
-        ImgLeft: "",
-        ImgRight: "",
-        categary: ""
+        ProductName : "",
+        Prize : 0,
+        Quantity : 0,
+        Available : true,
+        ImgFront : "",
+        categary : "",
+        Discription : "",
+        Section  : ""
 
     })
     let Cate = JSON.parse(sessionStorage.getItem('Cat'));
@@ -30,17 +31,16 @@ export default function CategaryCard() {
     const AddSubmit = (e) =>{
         e.preventDefault();
         const val = {
-            ProductName: data.ProductName,
-            Prize: data.Prize,
-            Size: data.Size,
-            Available: data.Available,
-            Color: data.Color,
-            ImgFront: data.ImgFront,
-            ImgLeft: data.ImgLeft,
-            ImgRight: data.ImgRight,
-            categary: data.categary
+            ProductName : data.ProductName,
+            Prize : data.Prize,
+            Quantity : data.Quantity,
+            Available : data.Available,
+            ImgFront : data.ImgFront,
+            categary : data.categary,
+            Discription : data.Discription,
+            Section  : data.Section
         }
-        console.log(val)
+        // console.log(val)
         fetch('http://localhost:8000/product/product', {
               method: 'POST',
               headers: {
@@ -69,8 +69,7 @@ export default function CategaryCard() {
         <>
             {/* get all the categary */}
             <Navbar />
-           
-            <form onSubmit={AddSubmit}>
+            <form onSubmit={AddSubmit} className=" form-center">
                 <div class="form-group">
                     <label class="form-control-label text-muted">ProductName</label>
                     <input type="text"
@@ -90,13 +89,13 @@ export default function CategaryCard() {
                         onChange={InputData} />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label text-muted">Size</label>
+                    <label class="form-control-label text-muted">Quantity</label>
                     <input type="number"
-                        placeholder="Size"
+                        placeholder="Quantity"
                         className="noscroll"
                         onSelect={Noscroll}
-                        name="Size"
-                        value={setData.Size}
+                        name="Quantity"
+                        value={setData.Quantity}
                         onChange={InputData} />
                 </div>
                 <div class="form-group">
@@ -108,16 +107,6 @@ export default function CategaryCard() {
                         onChange={InputData} />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label text-muted">Color</label>
-                    <input type="number"
-                        placeholder="Color"
-                        name="Color"
-                        className="noscroll"
-                        onSelect={Noscroll}
-                        value={setData.Color}
-                        onChange={InputData} />
-                </div>
-                <div class="form-group">
                     <label class="form-control-label text-muted">ImgFront</label>
                     <input type="text"
                         placeholder="ImgFront"
@@ -126,22 +115,22 @@ export default function CategaryCard() {
                         onChange={InputData} />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label text-muted">ImgLeft</label>
+                    <label class="form-control-label text-muted">Discription</label>
                     <input type="text"
-                        placeholder="ImgLeft"
-                        name="ImgLeft"
-                        value={setData.ImgLeft}
+                        placeholder="Discription"
+                        name="Discription"
+                        value={setData.Discription}
                         onChange={InputData} />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label text-muted">ImgRight</label>
+                    <label class="form-control-label text-muted">Section</label>
                     <input type="text"
-                        placeholder="ImgRight"
-                        name="ImgRight"
-                        value={setData.ImgRight}
+                        placeholder="Section"
+                        name="Section"
+                        value={setData.Section}
                         onChange={InputData} />
                 </div>
-                <div class="form-group">
+                <div class="">
                     <label class="form-control-label text-muted">categary</label>
                     <input type="text"
                         placeholder="categary"
@@ -153,6 +142,9 @@ export default function CategaryCard() {
                     <button class="btn-block btn-color">Send request</button>
                 </div>
             </form>
+            
+
+            
         </>
     )
 }

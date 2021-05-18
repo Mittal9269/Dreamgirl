@@ -1,87 +1,91 @@
 import React from "react";
 // import "../../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import { NavLink } from "react-router-dom";
 
-export default function Footer(){
-    return (
-        <>
-           
-<footer className="temp page-footer font-small unique-color-dark">
+export default function Footer() {
+  return (
+    <>
 
+      <hr/>
+      <div className="container-fluid mb-1 container-footer">
+        <div className="row">
+          <div className="clo-12 mx-auto">
+            <div className="row">
+              <div className="col-12 mx-auto">
+                <div className="row">
 
-  <div className="container text-center text-md-left mt-5 temp">
-    <div className="row mt-3">
-      <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">  
-        <h6 className="text-uppercase font-weight-bold mt-3">Company name</h6>
-        <hr className="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style={{width: "60px"}}/>
-        <p>DreamGirl is the Company which give a best service</p>
-      </div> 
-      <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">  
-        <h6 className="text-uppercase font-weight-bold mt-3">Products</h6>
-        <hr className="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style={{width: "60px"}}/>
-        <p>
-          <a href="#!">MDBootstrap</a>
-        </p>
-        <p>
-          <a href="#!">MDWordPress</a>
-        </p>
-        <p>
-          <a href="#!">BrandFlow</a>
-        </p>
-        <p>
-          <a href="#!">Bootstrap Angular</a>
-        </p>
+                  <div className=" div-card">
+                    <div className="card-change">
+                      <NavLink to="..." className="nav">
+                        <div className="card-body">
+                        <a className="set"><i class="fa fa-info-circle"></i></a>
+                          <h5 className="card-title footer-card"><span className="footer-css">Need Help</span></h5>
+                          <p className="card-text footer-card">
+                          <span className="footer-css">View our Help page for help</span>
+                        </p>
+                        </div>
+                      </NavLink>
+                    </div>
+                  </div>
+
+                  <div className=" div-card" >
+                    <div className="card-change">
+                      <NavLink to="..." className="nav">
+                        <div className="card-body">
+                        <a className="set"><i className="fa fa-envelope"></i></a>
+                          <h5 className="card-title footer-card"><span className="footer-css">Mail Us</span></h5>
+                          <p className="card-text footer-card">
+                          <span className="footer-css">shubhamveriaty@gmail.com</span>
+                        </p>
+                        </div>
+                      </NavLink>
+                    </div>
+                  </div>
+
+                  <div className=" div-card">
+                    <div className="card-change">
+                      <NavLink to="..." className="nav">
+                        <div className="card-body">
+                        <a className="set"><i class="fa fa-address-card"></i></a>
+                          <h5 className="card-title footer-card"><span className="footer-css">About Us</span></h5>
+                          <p className="card-text footer-card">
+                          <span className="footer-css">Know us more</span>
+                        </p>
+                        </div>
+                      </NavLink>
+                    </div>
+                  </div>
+
+                  <div className=" div-card">
+                    <div className="card-change">
+                      <NavLink to="..." className="nav">
+                        <div className="card-body">
+                          <h5 className="card-title footer-card"><span className="footer-css">Follow Us</span></h5>
+                          <div style={{margin: "12px 0"}} className="social">
+                            <a className="socialmediaLink" href="#"><i class="fa fa-instagram"></i></a>
+                            <a className="socialmediaLink" href="#"><i class="fa fa-twitter"></i></a>
+                            <a className="socialmediaLink" href="#"><i class="fa fa-linkedin"></i></a>
+                            <a className="socialmediaLink" href="#"><i class="fa fa-facebook"></i></a>
+                          </div>
+                        </div>
+                      </NavLink>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      
-      <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-        <h6 className="text-uppercase font-weight-bold mt-3">Follow Us</h6>
-        <hr className="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style={{width: "60px"}}/>
-        <p>
-          <a href="#!">Instagram</a>
-        </p>
-        <p>
-          <a href="#!">Facebook</a>
-        </p>
-        <p>
-          <a href="#!">Twitter</a>
-        </p>
-        <p>
-          <a href="#!">Linkedin</a>
-        </p>
-
-      </div>
-
-      
-      <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-
-        
-        <h6 className="text-uppercase font-weight-bold mt-3">Contact</h6>
-        <hr className="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style={{width: "60px"}}/>
-        <p>
-          <i className="fas fa-home mr-3"></i> New York, NY 10012, US</p>
-        <p>
-          <i className="fas fa-envelope mr-3"></i> info@example.com</p>
-        <p>
-          <i className="fas fa-phone mr-3"></i> + 01 234 567 88</p>
-        <p>
-          <i className="fas fa-print mr-3"></i> + 01 234 567 89</p>
-
-      </div>
-      
-
-    </div>
-    
-
-  </div>
-  
-
-  
-  <div className="footer-copyright text-center py-3">© 2020 Copyright:
-    <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
-  </div>
-  
-
-</footer>
-
-        </>
-    )
+      <hr/>
+      <footer className=" d-flex justify-content-between footer-css">
+        <div>
+          <span className="footer-css">GopalTredars About Us . More .</span>
+        </div>
+        <div>
+          <p className="text-footer mr-5"><span className="footer-css">© 2021 GopalTredars. All rights Reserved.</span> </p>
+        </div>
+      </footer>
+    </>
+  )
 }

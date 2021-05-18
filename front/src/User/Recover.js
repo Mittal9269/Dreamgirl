@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "../FormType/Navbar";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Recover(){
     let [data,setEmail] = useState("")
@@ -22,6 +24,49 @@ export default function Recover(){
             })
             .then(res=>{
                 console.log(res);
+                if(res.status === 200){
+                    toast.success(' Please Check your Email !', {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
+                }
+                else if (res.status === 404){
+                    toast.error(' Email doesn not exist !', {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
+                }
+                else if(res.status === 403){
+                    toast.warning(" You can't make Multiple Request For password Change within 20 minutes !", {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
+                }else{
+                    toast.error(" There is some problem please try after sometime", {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
+                }
                 // console.log(res.massage)
             })
             .catch(err=>console.log(err));   
@@ -41,6 +86,17 @@ export default function Recover(){
             />
             <button type="submit">Submit</button>
         </form>
+        <ToastContainer
+                position="top-center"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </>
     )
 }

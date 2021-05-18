@@ -6,6 +6,8 @@ import {NavLink} from "react-router-dom";
 import Logo from "../Images/logo.png";
 // import axios from 'axios';
 import Navbar from "./Navbar";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Signin() {
     const [redirect, setRedirect] = useState(false);
@@ -54,19 +56,32 @@ export default function Signin() {
         })
             .then(res => {
                 if(res.status !== 201){
-                    alert("bad request");
+                    toast.error('Bad request please try again', {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                 }
                 else{
-                    alert("successfully done")
+                    toast.success('registration done successfully', {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        });
                 }
             }
             )
             .catch(err => console.log(err));
-        // axios.post('http://localhost:8000/api/signup',registerd)
-        // .then(Response => console.log(Response))
-        // .catch(err => console.log(err));
 
-        // window.location = '/api/login';
+      
 
     }
     return (
@@ -79,8 +94,8 @@ export default function Signin() {
                         <div class="card card1">
                             <div class="row justify-content-center my-auto">
                                 <div class="col-md-8 col-10 my-5">
-                                    <div class="row justify-content-center px-3 mb-3"> <img id="logo" src={Logo} /> </div>
-                                    <h3 class="mb-5 text-center heading">We are DreamGirl</h3>
+                                    <div class="row justify-content-center px-3 mb-3"> <h1>GopalTredars </h1></div>
+                                    
                                     <h6 class="msg-info">Please login to your account</h6>
 
                                     <form onSubmit={formSubmit}>
@@ -146,6 +161,17 @@ export default function Signin() {
                     </div>
                 </div>
             </div>
+            <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </>
     )
 }

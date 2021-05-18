@@ -1,0 +1,11 @@
+.form-center{
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    justify-content: center;
+    /* align-items: center; */
+    border: 2px solid rgb(190, 179, 179);
+    border-radius: 10px;
+    margin-left: 30%;
+    padding: 20px;
+}

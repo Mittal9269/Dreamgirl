@@ -5,13 +5,12 @@ exports.newProduct = (req , res) =>{
     const Product = new product ({
         ProductName : req.body.ProductName,
         Prize : req.body.Prize,
-        Size : req.body.Size,
+        Quantity : req.body.Quantity,
         Available : req.body.Available,
-        Color : req.body.Color,
         ImgFront : req.body.ImgFront,
-        ImgLeft : req.body.ImgLeft,
-        ImgRight :req.body.ImgRight,
-        categary : req.body.categary
+        categary : req.body.categary,
+        Discription : req.body.Discription,
+        Section  : req.body.Section
     })
 
     Product.save().then((new_user,err)=>{
@@ -48,13 +47,12 @@ exports.updateProduct = (req, res)=>{
             updatedPro = {
                 ProductName : req.body.ProductName,
                 Prize : req.body.Prize,
-                Size : req.body.Size,
+                Quantity : req.body.Quantity,
                 Available : req.body.Available,
-                Color : req.body.Color,
                 ImgFront : req.body.ImgFront,
-                ImgLeft : req.body.ImgLeft,
-                ImgRight :req.body.ImgRight,
-                categary : req.body.categary
+                categary : req.body.categary,
+                Discription : req.body.Discription,
+                Section  : req.body.Section
             }
             // console.log(req.body)
             product.findByIdAndUpdate(req.params.id , updatedPro , {
