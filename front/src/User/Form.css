@@ -25,7 +25,7 @@ textarea:focus {
     -moz-box-shadow: none !important;
     -webkit-box-shadow: none !important;
     box-shadow: none !important;
-    border: 1px solid #D500F9 !important;
+    border: 1px solid #070707 !important;
     outline-width: 0;
     font-weight: 400
 }
@@ -56,8 +56,8 @@ button:focus {
 }
 
 #logo {
-    width: 200px;
-    height: 120px
+    width: 100px;
+    height: 50px
 }
 
 .heading {
@@ -84,7 +84,7 @@ button:focus {
 
 .msg-info {
     padding-left: 15px;
-    margin-bottom: 30px
+    /* margin-bottom: 30px */
 }
 
 .btn-color {
@@ -140,16 +140,14 @@ a:hover {
 @media screen and (max-width: 992px) {
     .card1 {
         width: 100%;
-        padding: 40px 30px 10px 30px
+    }
+    .card2{
+        display:none !important;
     }
 
-    .card2 {
-        width: 100%
-    }
 
     .right {
-        margin-top: 100px !important;
-        margin-bottom: 100px !important
+        display: hidden !important;
     }
 }
 
@@ -159,11 +157,10 @@ a:hover {
     }
 
     .card2 {
-        padding: 50px
+        display:none !important;
     }
 
     .right {
-        margin-top: 50px !important;
-        margin-bottom: 50px !important
+        display: hidden !important;
     }
 }

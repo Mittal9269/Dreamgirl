@@ -7,13 +7,12 @@ import "./Info.css";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Colors from "./Color";
+import Relative from "./Relative";
 
 export default function CardInfo(){
-    const [redirect,setRedirect] = useState(false);
     const {id} = useParams();
-    const [userdata ,Setuserdata] = useState({
-        
-    });
+    const [quantityEnter , setQuantityEnter]  = useState(1);
+    const [userdata ,Setuserdata] = useState([]);
 
     const [data,setData] = useState({
         ProductName : "",
@@ -49,6 +48,7 @@ export default function CardInfo(){
                     Discription:fetchedata.Discription,
                     Section:fetchedata.Section
                 })
+                // console.log(data)
             })
             .catch(err=>console.log(err));
     }
@@ -58,42 +58,52 @@ export default function CardInfo(){
     },[])
 
     useEffect(() => {
-        let token = sessionStorage.getItem("Token");
-        if(token){
-            let array = [];
-            let userInfo  = JSON.parse(sessionStorage.getItem("userInfo")); 
-            if(userInfo !== undefined){
-                Setuserdata(userInfo)       
-            }
-
+        // let token = sessionStorage.getItem("Token");
+        let userInfo  = JSON.parse(localStorage.getItem("productId")); 
+        if(userInfo && userInfo.length !== 0){
+            Setuserdata(userInfo)       
         }else{
-            setRedirect(true);
+          // sessionStorage.setItem("productId" , JSON.stringify([]));
+          let arr = [];
+          Setuserdata(arr)
         }
     }, [])
-    const render = () =>{
-        alert("please login first to see our product");
-        <Redirect to="/api/login" />
-    }
+    
 
     const SendId = (e) =>{
-        e.preventDefault();
+      e.preventDefault();
+      if(!quantityEnter){
+        setQuantityEnter(1);
+      }
         
-        if(Object.keys(userdata).length > 0){
-            if(userdata.history.indexOf(id) === -1){
-                userdata.history.push(id);
-                sessionStorage.setItem("userInfo" , JSON.stringify(userdata))
-                toast.success(' Successfully Added', {
-                    position: "top-center",
-                    autoClose: 1000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    });
-                   
+        if(!userdata.includes(id)){
+            toast.success(' Card added successfully !', {
+              position: "top-center",
+              autoClose: 1000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            });
+            
+            let prevdata = JSON.parse(localStorage.getItem("productId"));
+            if(!prevdata){
+              let newdata = [id];
+              localStorage.setItem(id , quantityEnter)
+              localStorage.setItem("productId",JSON.stringify(newdata));
+      
+              Setuserdata(newdata);
             }else{
-                toast.warning(' Product already in Cart', {
+              let newdata = [...prevdata,id];
+              localStorage.setItem(id , quantityEnter)
+              localStorage.setItem("productId",JSON.stringify(newdata));
+              Setuserdata(newdata); 
+            }
+          }
+          else{
+              if( localStorage.getItem(id) !== quantityEnter){
+                toast.success(' Successfully quantity updated!', {
                     position: "top-center",
                     autoClose: 1000,
                     hideProgressBar: false,
@@ -101,18 +111,33 @@ export default function CardInfo(){
                     pauseOnHover: true,
                     draggable: true,
                     progress: undefined,
-                    });
-                sessionStorage.setItem("userInfo" , JSON.stringify(userdata))   
-            }
-        }
+                  });
+                  localStorage.setItem(id , quantityEnter)
+              }
+              else{
+                toast.info(' Card already exits !', {
+                    position: "top-center",
+                    autoClose: 1000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                  });
+              }
+          }
         
+    }
+
+
+
+    const dataEnter = (e) =>{
+        setQuantityEnter(e.target.value)
     }
     return(
         <>
             <Navbar />
-            {redirect && <Redirect to="/api/login" />}
             <div className="app">
-
             <div className="details-info" key={id}>
               <div className="big-img-info">
                 <img src={Img} alt="Not Found"/>
@@ -127,14 +152,26 @@ export default function CardInfo(){
                 <p className="change-text">{Section}</p>
                 <p className="change-text">{Discription}</p>
                 <br/>
-                {Available === "Yes" ? <h4 style={{Color:'green'}}>Avalable</h4> : <h4 style={{Color:'red'}}>Not Avalable</h4>}
+                {Available === "Yes" ? <h4 style={{Color:'green'}}>Available</h4> : <h4 style={{Color:'red'}}>Not Avalable</h4>}
+                <input 
+                    type="number"
+                    min = "1"
+                    max = {Quantity}
+                    name = "numberValue"
+                    value={quantityEnter}
+                    onChange={dataEnter}
+                    placeholder="Enter quatity"
+                    className="input_change"
+                />
                 <form onSubmit={SendId}>
-                   
                     <button className="cart">Add to cart</button> 
                 </form>
               </div>
               </div>
-            </div>   
+            </div>  
+            {categary.length !== 0 && <Relative identity={id} cat={categary} />} 
+           
+            
             <ToastContainer
                 position="top-center"
                 autoClose={1000}

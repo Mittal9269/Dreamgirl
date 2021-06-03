@@ -55,10 +55,10 @@ export default function Signin() {
             credentials: "same-origin"
         })
             .then(res => {
-                if(res.status !== 201){
+                if(res.status !== 200){
                     toast.error('Bad request please try again', {
                         position: "top-center",
-                        autoClose: 5000,
+                        autoClose: 2000,
                         hideProgressBar: false,
                         closeOnClick: true,
                         pauseOnHover: true,
@@ -69,13 +69,17 @@ export default function Signin() {
                 else{
                     toast.success('registration done successfully', {
                         position: "top-center",
-                        autoClose: 5000,
+                        autoClose: 2000,
                         hideProgressBar: false,
                         closeOnClick: true,
                         pauseOnHover: true,
                         draggable: true,
                         progress: undefined,
                         });
+
+                    setTimeout(() =>{
+                        window.location = "/api/login";
+                    } , 2000)
                 }
             }
             )
@@ -94,9 +98,10 @@ export default function Signin() {
                         <div class="card card1">
                             <div class="row justify-content-center my-auto">
                                 <div class="col-md-8 col-10 my-5">
+                                <div class="row justify-content-center px-3 mb-3"> </div>
                                     <div class="row justify-content-center px-3 mb-3"> <h1>GopalTredars </h1></div>
                                     
-                                    <h6 class="msg-info">Please login to your account</h6>
+                                    <h6 class="msg-info">Please create account</h6>
 
                                     <form onSubmit={formSubmit}>
                                         <div class="form-group">
@@ -163,7 +168,7 @@ export default function Signin() {
             </div>
             <ToastContainer
                 position="top-center"
-                autoClose={5000}
+                autoClose={2000}
                 hideProgressBar={false}
                 newestOnTop={false}
                 closeOnClick

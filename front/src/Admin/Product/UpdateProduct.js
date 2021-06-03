@@ -44,6 +44,7 @@ export default function UpdateProduct(props){
     }
 
     useEffect(()=>{
+        console.log(props)
         fetchData();
     },[])
 

@@ -1,7 +1,7 @@
 export const Brands = [
       {
         _id : "123",
-        name : "Milton"
+        name : "milton"
       },
       {
         _id : "124",
@@ -34,29 +34,29 @@ export const Brands = [
 ]
 export const Prices = 
     [
-      [
-        "201",
-        1,
-        10
-      ],
-      [
-        "202",
-        11,
-        100
-      ],
-      [
-        "205",
-        101,
-        500
-      ],
-      [
-        "203",
-        501,
-        1000
-      ],
-      [
-        "204",
-        1001,
-        5000
-      ]
+      {
+        _id:"201",
+        mini:1,
+        maxi:10
+      },
+      {
+        _id: "202",
+        mini: 11,
+        maxi: 100
+      },
+      {
+        _id:"205",
+        mini:101,
+        maxi:500
+      },
+      {
+        _id:"203",
+        mini:501,
+        maxi:1000
+      },
+      {
+        _id:"204",
+        mini:1001,
+        maxi:5000
+      }
     ]

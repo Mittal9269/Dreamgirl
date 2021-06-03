@@ -9,52 +9,87 @@ import Navbar from "../FormType/Navbar";
 // import categories from "./Filter";
 import Brand from "./Brands";
 import Price from "./Prices";
+import Parallex from "react-rellax";
+import ScrollToUp from "./CartFloder/ScrollToUp";
 
 export default function Shop() {
+    const [myFilters,setMyFilters] = useState({
+        filters:{category:[],price:[]}
+    });
+
     const [products, setProducts] = useState([]);
     const [state,setState] = useState([]);
     const [checked,setChecked] = useState([]);
 
-    const handleStateChange = (id) => {
-         console.log(id);
-        //  console.log(id);
-         const currentIndex = checked.indexOf(id);
-        const newChecked = [...checked];
-        if(currentIndex === -1){
-            newChecked.push(id);
-        }else{
-            newChecked.splice(currentIndex,1);
-        }
-        setChecked(newChecked);
-        // fiteredSearch(newChecked);
-    }
 
     useEffect(() => {
-        fetch('http://localhost:8000/product/product', {
+        loadFilters(myFilters);
+    }, []);
 
-            method: 'GET',
+    const loadFilters = (filters)=>{
+        fetch("http://localhost:8000/product/product/by/search",{
+            method:"POST",
             headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            }
-        })
-            .then(res => res.json())
-            .then(data => {
-                // let newArray = [];
-                let filterAray = sessionStorage.getItem("Ids");
-                // findFilter(data)
-                // const 
+                Accept: "applications/json",
+                "Content-Type": "application/json",
+              },
+            body: JSON.stringify(filters),
+        }).then(res=>res.json())
+        .then(data=>{
+            if(data && data.error){
+                alert("Data not found")
+            }else{
                 setProducts(data);
-                // console.log(data)
-            })
-            .catch(err => console.log(err));
-    }, [])
+            }
+        }).catch(err=>{
+            console.log(err);
+        })
+    }
+
+
+    const handlePrice = (filters) => {
+        let priceArray = [];
+
+        for(let key = 0; key<Prices.length; key++){
+            if(filters.includes(Prices[key]._id))
+                priceArray.push([Prices[key].mini,Prices[key].maxi]);
+        }
+        return priceArray;
+    }
+
+
+    const handleCategory = (filters)=>{
+        let category = [];
+        for(let key = 0; key<Brands.length; key++){
+            if(filters.includes(Brands[key]._id))
+                category.push(Brands[key].name)
+        }
+        return category;
+    }
+
+
+    const handleSearch = (filters,filterBy) => {
+        const newFilter = {...myFilters};
+        newFilter.filters[filterBy] = filters;
+        if(filterBy === "price"){
+            let priceValue = handlePrice(filters);
+            newFilter.filters[filterBy] = priceValue;
+        }else {
+            let category = handleCategory(filters);
+            newFilter.filters[filterBy] = category;
+        }
+        setMyFilters(newFilter);
+        loadFilters(newFilter);
+    }
+
+
     return (
         <>
             <Navbar />
             <div className="my-5">
                 <h1 className="text-center"> Our Products</h1>
             </div>
+            <ScrollToUp />
             <div className="container-fluid mb-5">
                 <div className="row">
                     <div className="clo-10 mx-auto">
@@ -67,22 +102,23 @@ export default function Shop() {
                                             <h4 style={{ justifyContent: "center", paddingLeft: "20px", textAlign: "center" }}>Filter | <span><a>Clear all</a></span> </h4>
                                             <hr />
                                             <div className="accordion">
-                                                {/* <ul>
-                                                    <Brand handleStateChange={handleStateChange} Brands = {Brands} /> 
+                                                <ul>
+                                                    <Brand  Brands = {Brands} filteredSearch={handleSearch}/> 
                                                 </ul>
                                                 <ul>
-                                                    <Price handleStateChange={handleStateChange} Prices = {Prices} /> 
-                                                </ul> */}
+                                                    <Price  Prices = {Prices} filteredSearch={handleSearch}/> 
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>
+                                    {/* <Parallex speed={-5}></Parallex> */}
                                     <div className="col-lg-10 order-1 order-lg-2 header-img">
                                         <div className="row">
-
                                             {products.length !== 0 && (
                                                 products.map((value) => {
                                                     return (
                                                         <Card
+                                                            id = {value._id}
                                                             productInfo={value}
                                                             img={img2}
                                                         />

@@ -95,3 +95,44 @@
       width: 50px;
     }
   }
+
+
+  @media screen and (max-width: 480px) {
+    .app{
+      min-width: 40% !important;
+      margin: 0px auto !important;
+      display: flex;
+      /* flex-direction: column; */
+    }
+    .details-info{
+      display: flex !important;
+      flex-direction: column !important;
+
+    }
+    .big-img-info{
+    width: 180px !important;
+    height: 20%;
+    overflow: hidden;
+    }
+    .big-img-info img{
+      width: 100% !important;
+      height: 100% !important;
+    
+      display: block;
+      object-fit: cover;
+      overflow: hidden !important;
+    }
+    .box-info{
+      width: 80% !important;
+    }
+    .change-text{
+        width: 70% !important;
+    }
+    .details-info .big-img-info{
+      /* max-width: 500px; */
+      min-width: 80% !important;
+      min-height: 100% !important;
+      overflow: hidden;
+      margin: 25px;
+    }
+  }

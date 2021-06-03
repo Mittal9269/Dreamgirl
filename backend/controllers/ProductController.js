@@ -97,3 +97,94 @@ exports.deleteProduct = (req ,res) =>{
     })
 }
 
+exports.productFilter = (req,res) => {
+    let {category,price} = req.body.filters;
+    let Args = {};
+    if(category.length !== 0){
+        Args["categary"] = category;
+    }
+    for(let key in price){
+        Args["Prize"] = {$gte:price[key][0],$lte:price[key][1]}
+    }
+    if((!("categary" in Args)) && (!("Prize" in Args))){
+        product.find({})
+        .exec((err,data)=>{
+            if(err){
+                return res.status(400).json({error:"Products not Found"});
+            }
+            return res.json(data);
+        });
+    }else{
+        product.find(Args)
+            .exec((err,data)=>{
+                if(err){
+                    return res.status(400).json({error:"Products not Found"});
+                }
+                return res.json(data);
+                });
+    }
+}
+
+exports.productSearch = (req,res) => {
+    // console.log(req.body)
+    let Id = req.body.Id;
+    let Args = [];
+    if(Id.length !== 0){
+        Id = Id.replace("_" , " ");
+        console.log(Id)
+        Args.push({"categary" : Id})
+        Args.push({"ProductName" : {$regex: Id , $options: "$i"}});
+    }
+    
+    if(Args.length === 0){
+        return res.status(400).json({error:"Products not Found"});
+        product.find({})
+        .exec((err,data)=>{
+            if(err){
+                return res.status(400).json({error:"Products not Found"});
+            }
+            return res.json(data);
+        });
+    }else{
+        product.find({$or : Args})
+            .exec((err,data)=>{
+                if(err){
+                    return res.status(400).json({error:"Products not Found"});
+                }
+                return res.json(data);
+                });
+    }
+}
+
+
+exports.RelatedSearch = (req,res) => {
+    // console.log(req.body)
+    let identity = req.params.id;
+    let {Id , ID} = req.body;
+    let Args = {};
+    // console.log(Id)
+    // console.log(ID)
+    if(Id.length !== 0){
+        Args["categary"] = Id;
+    }
+    Args["_id"] = {$ne:ID} ;
+    if((!("categary" in Args))){
+        return res.status(400).json({error:"Products not Found"});
+        product.find({})
+        .exec((err,data)=>{
+            if(err){
+                return res.status(400).json({error:"Products not Found"});
+            }
+            return res.json(data);
+        });
+    }else{
+        product.find(Args)
+        // product.find(Args)
+            .exec((err,data)=>{
+                if(err){
+                    return res.status(400).json({error:"Products not Found"});
+                }
+                return res.json(data);
+                });
+    }
+}

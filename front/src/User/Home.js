@@ -1,78 +1,122 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 
-import Img1 from "../Images/image_1.jpeg";
-import Img2 from "../Images/image_3.jpeg";
-import Img3 from "../Images/image_2.jpeg";
-import Blank from "../Images/brown.png";
-import Page1 from "../Images/image1.jpeg"
-import Page2 from "../Images/image2.jpeg"
-import Page3 from "../Images/image3.jpeg"
+
 import "./homeproducts.css";
 import "jquery";
 // import Carousel from 'react-gallery-carousel';
 // import 'react-gallery-carousel/dist/index.css';
-import Carousel from 'react-bootstrap/Carousel'
+// import Carousel from 'react-bootstrap/Carousel'
 import Section from "./Section";
 import Card from "./Card";
 import Navbar from "../FormType/Navbar";
-import ImageHome from "./ImageHome";
+
 import Search from "./HomeComponent/Search";
 import PopularSearch from "./HomeComponent/PopularSearch";
+import ImageHome from "./ImageHome";
+// import { Carousel } from "react-responsive-carousel";
+import Transforming from "./HomeComponent/Transforming";
+import CarouselCom from "./HomeComponent/Carousel";
+import { ReactSearchAutocomplete } from 'react-search-autocomplete'
+import Data from "./SearchData";
+
+
+const handleOnSearch = (string, results) => {
+    // onSearch will have as the first callback parameter
+    // the string searched and for the second the results.
+    // console.log(string, results)
+  }
+
+  const handleOnHover = (result) => {
+    // the item hovered
+    // console.log(result)
+  }
+
+  
+  const handleOnFocus = () => {
+    // console.log('Focused')
+  }
+
 
 
 
 export default function Home() {
+   
+    const [searchValue , setSearchValue] = useState("");
+
+    const ChangeSearchResult = (e) =>{
+      setSearchValue(e.target.value);
+      console.log(searchValue)
+    }
+    const handleOnSelect = (item) => {
+      // the item selected
+      // console.log(item)
+      setSearchValue(item.name)
+    }
+    const SubmitSearch = (e) =>{
+      e.preventDefault();
+      
+      if(searchValue === ""){
+        alert("nothing wrote , nothing happen !")
+      }else{
+        let res = searchValue.replace(" ", "_");  
+        window.location = "/api/search/" + res;
+      }
+    
+    }
     return (
         <>
             <Navbar />
-            <div style={{ width: "200px" }}>
+            {/* <div style={{ width: "200px" }}>
 
-            </div>
+            </div> */}
             {/* <Section /> */}
-            <div className="my-3 claser col-10 mx-auto">
-                <Carousel >
-                    <Carousel.Item interval={1000}>
-                        <img
-                            className="d-block w-100"
-                            src={Page3}
-                            alt="First slide"
-                            style={{ opacity: "0.2" }}
-                        />
-                        <Carousel.Caption>
-                            <Section style={{ position: "absolute", marginUp: "1000px" }} />
-                        </Carousel.Caption>
-                    </Carousel.Item>
-                    <Carousel.Item interval={500}>
-                        <img
-                            className="d-block w-100"
-                            src={Page2}
-                            alt="Second slide"
-                            style={{ opacity: "0.8" }}
-                        />
-                        <Carousel.Caption>
-                            
-                        </Carousel.Caption>
-                    </Carousel.Item>
-                    <Carousel.Item>
-                        <img
-                            className="d-block w-100"
-                            src={Page1}
-                            alt="Third slide"
-                            style={{ opacity: "0.8" }}
-                        />
-                        <Carousel.Caption>
-                            
-                        </Carousel.Caption>
-                    </Carousel.Item>
-                </Carousel>
-            </div>
-            <div className="my-5">
-                <h1 className="text-center"> Find your Product</h1>
-            </div>
-            {/* <hr/> */}
-            {/* <Search /> */}
-            <ImageHome />
+            <div className="pl-0 pr-0 mx-0 nav_bg ceil-bottom" style={{ backgroundColor: "#fafafa" }}>
+                
+                        
+                       <CarouselCom />
+                        {/* <hr/> */}
+                        {/* <Search /> */}
+                    </div>
+                    <form onSubmit={SubmitSearch}>
+                    <div className="my-5 mx-5">
+                    <ReactSearchAutocomplete
+                            items={Data}
+                            value = {searchValue}
+                            onSearch={handleOnSearch}
+                            onHover={handleOnHover}
+                            onSelect={handleOnSelect}
+                            onFocus={handleOnFocus}
+                            onChange={ChangeSearchResult}
+                            className="text search-input"
+                            placeholder="Type here to search..."
+                            autoFocus
+                            styling={{
+                              // height: "44px",
+                                border: "1px solid #dfe1e5",
+                                borderRadius: "0px !important",
+                                // width:"300px"
+                                // backgroundColor: "red",
+                              //   boxShadow: "rgba(32, 33, 36, 0.28) 0px 1px 6px 0px",
+                              //   hoverBackgroundColor: "#eee",
+                              //   color: "#212121",
+                              //   fontSize: "16px",
+                              //   fontFamily: "Arial",
+                              //   iconColor: "grey",
+                              //   lineColor: "rgb(232, 234, 237)",
+                              //   placeholderColor: "grey",
+                              //   clearIconMargin: '3px 14px 0 0',
+                              //   searchIconMargin: '0 0 0 16px'
+                            }}
+                          />
+                          <button className="my-3">Search</button>
+                    
+                    </div>
+                    </form>
+                   
+
+            <ImageHome  />
+            <Transforming />
             <PopularSearch />
         </>
     )

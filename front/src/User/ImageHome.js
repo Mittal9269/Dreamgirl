@@ -14,27 +14,27 @@ import Prastige from "../Images/Prastige/prastige.png";
 export default function ImageHome(){
     return(
         <>
-            <div className="mt-4 mt-5" style={{color:"white" , backgroundColor:"black"}}>
+            <div className="mt-5 div__"  style={{ backgroundColor:"#fafafa"}}>
                 <h6 style={{display:"hidden" ,opacity:"0"}}>Hello</h6>
-                <h1 className="text-center">Cello Products</h1>
+                <h1 className="text-center h1">Cello Products</h1>
                 <h3 className="text-center">Brand to satisfy your requirement</h3>
                 <h5 className="mt-4 text-center">Available Order Now</h5>
                 <div className="row home-product1 mr-4 ml-4 ">
                     <img src={Celloimage1} />
-                    <img src={Celloimage2} style={{width:"200px" , height:"200px"}} />
+                    <img src={Celloimage2} className="img-2" />
                     <img src={Celloimage3} />
                     <img src={Celloimage4} />
                     <img src={Celloimage5} />
                 </div>
             </div>
             <hr/>
-            <div className="" style={{ backgroundColor:"#fafafa"}}>
+            <div className="div__" style={{ backgroundColor:"#fafafa"}}>
                 <h1 className="text-center">Milton Products</h1>
                 <h3 className="text-center">Brand to satisfy your requirement</h3>
                 <h5 className="mt-4 text-center">Available Order Now</h5>
                 <div className="row home-product1 mr-4 ml-4 ">
-                    <img src={Miltonimage1} style={{width:"200px" , height:"200px"}} />
-                    <img src={Miltonimage2} style={{width:"200px" , height:"200px"}} />
+                    <img src={Miltonimage1} className="img__milton2"  />
+                    <img src={Miltonimage2} className="img__milton3" />
                     <img src={Miltonimage3} />
                     <img src={Miltonimage4} />
                     <img src={Miltonimage5} />
@@ -42,15 +42,15 @@ export default function ImageHome(){
             </div>
 
             <hr />
-            <div className="row">
-                <div className="col-6 center" style={{color:"white" , backgroundColor:"black"}}>
+            <div className="row last__div"  >
+                <div className="col-6 last__div1" style={{ backgroundColor:"#fafafa"}}>
                     <h1 className="text-center">Some Prastige Products</h1>
                     <h5 className="text-center">Brand to satisfy your requirement</h5>
                     <h6 className="mt-4 text-center">Available Order Now</h6>
                     <img className="img-home" src={Prastige} />
                 </div>
-               
-                <div className="col-6" style={{ backgroundColor:"#fafafa"}}>
+                <div className = "vertical-middle"></div>
+                <div className="style_right last__div2" style={{ backgroundColor:"#fafafa"}}>
                 <h1 className="text-center">Some Borosil Products</h1>
                     <h3 className="text-center">Brand to satisfy your requirement</h3>
                     <h5 className="mt-4 text-center">Available Order Now</h5>

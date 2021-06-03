@@ -21,6 +21,7 @@ import UpdateProduct from "./Admin/Product/UpdateProduct";
 import Cart from "./User/Cart";
 import ShopInfo from "./User/CardInfo/CardInfo";
 import Reset from "./User/Reset";
+import SearchCard from "./User/HomeComponent/SearchCard";
 
 function App() {
   console.log("conform everyone");
@@ -45,6 +46,7 @@ function App() {
         <Route exact path="/shopInfo/:id" component={ShopInfo} />
         <Route exact path="/api/reset/:id" component={Reset} />
         <Route exact path="/api/cart" component={Cart} />
+        <Route exact path="/api/search/:id" component={SearchCard} />
         {/* <Route exact path="/product/product" component={Product} /> */}
       </Switch>
     <Footer />

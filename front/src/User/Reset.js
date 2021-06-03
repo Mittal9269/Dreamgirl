@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 
 
 export default function Reset() {
-    const {id} = useParams();
+    const { id } = useParams();
     // console.log(id)
     const [data, setData] = useState({
         password: "",
@@ -39,15 +39,15 @@ export default function Reset() {
             .then(data => {
                 alert(data.message);
                 // console.log(data)
-                if(data.message === 'Your password has been updated.'){
+                if (data.message === 'Your password has been updated.') {
                     window.location = "/api/login";
                 }
-                
+
             })
             .catch(err => console.log(err));
 
     }
-    
+
     return (
         <>
             <form onSubmit={LoginSubmit}>
@@ -68,8 +68,8 @@ export default function Reset() {
                         onChange={InputData} />
                 </div>
                 <div class="row justify-content-center my-3 px-3">
-                                        <button class="btn-block btn-color">Reset Password</button>
-                                    </div>
+                    <button class="btn-block btn-color">Reset Password</button>
+                </div>
             </form>
         </>
     )

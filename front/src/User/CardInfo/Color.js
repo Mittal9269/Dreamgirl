@@ -15,11 +15,11 @@ export default function Color(props){
  return(
      <>
          <div className="colors">
-                {
+                {/* {
                 col.map((color, index) =>(
                     <button style={{background: color}} key={index}></button>
                 ))
-                }
+                } */}
             </div>
      </>
  )

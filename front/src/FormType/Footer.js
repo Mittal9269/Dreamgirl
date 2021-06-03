@@ -7,7 +7,8 @@ export default function Footer() {
     <>
 
       <hr/>
-      <div className="container-fluid mb-1 container-footer">
+      <div className="footer-pop">
+      <div className="container-fluid mb-1 container-footer ">
         <div className="row">
           <div className="clo-12 mx-auto">
             <div className="row">
@@ -80,12 +81,13 @@ export default function Footer() {
       <hr/>
       <footer className=" d-flex justify-content-between footer-css">
         <div>
-          <span className="footer-css">GopalTredars About Us . More .</span>
+          <span className="footer-css other__footer">GopalTredars About Us . More .</span>
         </div>
         <div>
-          <p className="text-footer mr-5"><span className="footer-css">© 2021 GopalTredars. All rights Reserved.</span> </p>
+          <p className="text-footer mr-5"><span className="footer-css check__footer">© 2021 GopalTredars. All rights Reserved.</span> </p>
         </div>
       </footer>
+      </div>
     </>
   )
 }

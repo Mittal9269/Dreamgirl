@@ -32,7 +32,7 @@ export default function Section() {
                                     </div>
                                 </div>
                                 <div className="col-lg-6 order-1 order-lg-2 justify-content-center">
-                                    <h1 className="mt-5">We are here with</h1>
+                                    <h1 className="mt-5">We are here</h1>
                                     <img
                                         src={Miltom}
                                         className="mr-2"

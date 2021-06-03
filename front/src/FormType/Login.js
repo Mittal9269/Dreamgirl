@@ -14,7 +14,7 @@ export default function Login() {
     const [data, setData] = useState({
         username: "",
         password: "",
-        verifyPassword: ""
+        // verifyPassword: ""
     })
     const [redirect, setRedirect] = useState(false);
     useEffect(() => {
@@ -37,7 +37,7 @@ export default function Login() {
         const login = {
             username: data.username,
             password: data.password,
-            verifyPassword: data.verifyPassword,
+            // verifyPassword: data.verifyPassword,
         }
 
 
@@ -129,8 +129,8 @@ export default function Login() {
                         <div class="card card1">
                             <div class="row justify-content-center my-auto">
                                 <div class="col-md-8 col-10 my-5">
-                                    <div class="row justify-content-center px-3 mb-3"> <img id="logo" src={Logo} /> </div>
-                                    <h3 class="mb-5 text-center heading">We are DreamGirl</h3>
+                                    <div class="row justify-content-center px-3 mb-3">  </div>
+                                    <h3 class="mb-5 text-center heading">GopalTredars</h3>
                                     <h6 class="msg-info">Please login to your account</h6>
                                     <form onSubmit={LoginSubmit}>
                                         <div class="form-group">
@@ -149,14 +149,14 @@ export default function Login() {
                                                 value={setData.password}
                                                 onChange={InputData} />
                                         </div>
-                                        <div class="form-group">
+                                        {/* <div class="form-group">
                                             <label class="form-control-label text-muted">Conform Password</label>
                                             <input type="password"
                                                 placeholder="conform pasword"
                                                 name="verifyPassword"
                                                 value={setData.verifyPassword}
                                                 onChange={InputData} />
-                                        </div>
+                                        </div> */}
                                         <div class="row justify-content-center my-3 px-3">
                                             <button class="btn-block btn-color">Login to DreamGirl</button>
                                         </div>

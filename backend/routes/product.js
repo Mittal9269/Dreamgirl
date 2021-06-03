@@ -15,4 +15,9 @@ router.put('/product/:id' , product_control.updateProduct)
 
 router.delete('/product/:id' , product_control.deleteProduct)
 
+router.post('/product/by/search' , product_control.productFilter)
+
+router.post('/product/by/searchCard' , product_control.productSearch)
+
+router.post('/product/by/RelatedSearch/:id' , product_control.RelatedSearch)
 module.exports = router;
