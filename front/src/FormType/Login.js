@@ -135,7 +135,8 @@ export default function Login() {
                                     <form onSubmit={LoginSubmit}>
                                         <div class="form-group">
                                             <label class="form-control-label text-muted">Username</label>
-                                            <input type="text"
+                                            <input 
+                                                type="text"
                                                 placeholder="Username"
                                                 name="username"
                                                 value={setData.username}

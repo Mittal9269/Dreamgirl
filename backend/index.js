@@ -12,7 +12,10 @@ const ProductRouter = require("./routes/product");
 const CategaryRouter = require("./routes/categery");
 
 //DataBase Connections
-mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true , useUnifiedTopology: true,useCreateIndex: true});
+mongoose.connect(process.env.MONGO_URL, {useNewUrlParser: true , useUnifiedTopology: true,useCreateIndex: true})
+.then(() => console.log("Connetion successful"))
+.catch(err => console.log("no connection"))
+;
 
 //Middlewares
 app.use(cors({origin:"http://localhost:3000" ,credentials : true}));

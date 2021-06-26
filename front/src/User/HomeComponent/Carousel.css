@@ -1,10 +1,12 @@
 .image-show{
-    border: 2px solid rgb(12, 12, 12);
+    /* border: 2px solid rgb(12, 12, 12); */
     background-image: url(../../Images/image1.jpeg) cover;
-    align-items: center;
+    align-items: center !important;
+    margin: auto !important;
 }
 .image-full{
     /* background: cover; */
+    margin-left: 0px !important;
     width: 1800px;
     height: 100%; 
     /* opacity: 0.1; */

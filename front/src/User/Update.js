@@ -73,51 +73,6 @@ export default function Update() {
         <>
             <Navbar />
             {redirect && <Redirect to="/api/login" />}
-            {/* <form onSubmit={onSub}>
-                <input
-                    type="text"
-                    placeholder="Enter your username"
-                    value={data.username}
-                    onChange={InputChange}
-                    name="username"
-                />
-                <input
-                    type="text"
-                    placeholder="Enter your FirstName"
-                    value={data.firstName}
-                    onChange={InputChange}
-                    name="firstName"
-                />
-                <input
-                    type="text"
-                    placeholder="Enter your lastName"
-                    value={data.lastName}
-                    onChange={InputChange}
-                    name="lastName"
-                />
-                <input
-                    type="password"
-                    placeholder="Enter New password"
-                    value={data.password}
-                    onChange={InputChange}
-                    name="password"
-                />
-                <input
-                    type="password"
-                    placeholder="Enter New con password"
-                    value={data.verifyPassword}
-                    onChange={InputChange}
-                    name="verifyPassword"
-                />
-                <input
-                    type="email"
-                    placeholder="Enter your Email"
-                    value={data.email}
-                    onChange={InputChange}
-                    name="email"
-                />
-                <button type="submit">Submit</button>
-            </form> */}
 
             <div className="container-fluid" id="page-content">
                 <div className="padding">

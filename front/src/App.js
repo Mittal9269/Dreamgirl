@@ -7,6 +7,7 @@ import Home from "./User/Home";
 import Recover from "./User/Recover";
 import User from "./User/User";
 import Update from "./User/Update";
+import $ from "jquery";
 import AdminHome from "./Admin/AdminHome";
 import Logout from "./FormType/Logout";
 import Categary from "./Admin/Categary/Categary";

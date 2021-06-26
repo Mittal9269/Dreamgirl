@@ -5,9 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default function Recover(){
     let [data,setEmail] = useState("")
-    const inputData = (event) =>{
-        setEmail(event.target.value)
-    }
+     
     const onSub = (e) =>{
         e.preventDefault();
         let b = {
@@ -73,7 +71,9 @@ export default function Recover(){
 
             // window.location = "/";
     }
-
+    const inputData = (e) =>{
+        setEmail(e.target.value);
+    }
     return(
         <>
         <Navbar />

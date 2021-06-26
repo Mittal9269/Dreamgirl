@@ -9,7 +9,7 @@ export default function CategaryC(props) {
         fetch('http://localhost:8000/product/product/' + props.everything._id, {
             method: 'DELETE',
         })
-            .then(res => res.text()) // or res.json()
+            .then(res => res.text()) 
             .then(text => window.location("/product/product"))
             .catch(err => console.log(err))
     }
